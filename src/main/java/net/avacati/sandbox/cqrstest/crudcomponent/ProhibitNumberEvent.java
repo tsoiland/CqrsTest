@@ -1,4 +1,4 @@
-package net.avacati.sandbox.cqrstest;
+package net.avacati.sandbox.cqrstest.crudcomponent;
 
 public class ProhibitNumberEvent {
     public int number;

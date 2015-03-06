@@ -1,28 +1,30 @@
-package net.avacati.sandbox.cqrstest.crudcomponent;
+package net.avacati.sandbox.cqrstest.crudcomponent.implementation;
 
-import net.avacati.sandbox.cqrstest.AllowNumberEvent;
-import net.avacati.sandbox.cqrstest.ProhibitNumberEvent;
-import net.avacati.sandbox.cqrstest.SystemBus;
+import net.avacati.sandbox.cqrstest.crudcomponent.*;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProhibitionService {
-    private Map<Integer, ProhibitedNumber> prohibitedNumberRepository;
+public class ProhibitionService implements IProhibitionService {
+    private Map<Integer, ProhibitedNumberDto> prohibitedNumberRepository;
     private int nextId;
-    private SystemBus bus;
+    private CrudPublicBus bus;
 
-    public ProhibitionService(SystemBus bus) {
+    public ProhibitionService(CrudPublicBus bus) {
         this.bus = bus;
-        this.prohibitedNumberRepository = new HashMap<Integer, ProhibitedNumber>();
+        this.prohibitedNumberRepository = new HashMap<Integer, ProhibitedNumberDto>();
     }
 
-    public void Add(ProhibitedNumber dto) {
-        this.prohibitedNumberRepository.put(this.nextId++, dto);
+    @Override
+    public int Add(ProhibitedNumberDto dto) {
+        int id = this.nextId++;
+        this.prohibitedNumberRepository.put(id, dto);
         this.bus.Raise(new ProhibitNumberEvent(dto.number));
+        return id;
     }
 
-    public void Edit(int id, ProhibitedNumber dto) {
+    @Override
+    public void Edit(int id, ProhibitedNumberDto dto) {
         int oldNumber = this.prohibitedNumberRepository.get(id).number;
         if(dto.number != oldNumber) {
             this.bus.Raise(new ProhibitNumberEvent(dto.number));
@@ -33,12 +35,14 @@ public class ProhibitionService {
         this.prohibitedNumberRepository.put(id, dto);
     }
 
+    @Override
     public void Delete(int id) {
         this.prohibitedNumberRepository.remove(id);
         this.bus.Raise(new AllowNumberEvent(id));
     }
 
-    public ProhibitedNumber Get(int id){
+    @Override
+    public ProhibitedNumberDto Get(int id){
         return this.prohibitedNumberRepository.get(id);
     }
 }

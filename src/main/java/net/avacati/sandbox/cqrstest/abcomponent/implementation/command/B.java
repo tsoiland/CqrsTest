@@ -1,10 +1,12 @@
 package net.avacati.sandbox.cqrstest.abcomponent.implementation.command;
 
-public class B {
+import net.avacati.sandbox.cqrstest.abcomponent.NoPrimeNumbersException;
+
+class B {
     private final String bName;
     private final int i;
 
-    public B(String bName, int i) throws NoPrimeNumbersException {
+    B(String bName, int i) throws NoPrimeNumbersException {
         if(this.isPrime(i))
             throw new NoPrimeNumbersException();
 

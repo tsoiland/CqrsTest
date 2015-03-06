@@ -1,5 +1,5 @@
 package net.avacati.sandbox.cqrstest.abcomponent.implementation;
 
-public interface BEventListener {
+public interface NewBEventListener {
     void handle(NewBEvent event);
 }

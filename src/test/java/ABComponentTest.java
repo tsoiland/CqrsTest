@@ -1,79 +1,79 @@
+import net.avacati.sandbox.cqrstest.abcomponent.*;
+import net.avacati.sandbox.cqrstest.abcomponent.implementation.ABFacadeImpl;
 import net.avacati.sandbox.cqrstest.abcomponent.implementation.EventBus;
 import net.avacati.sandbox.cqrstest.abcomponent.implementation.command.CommandService;
-import net.avacati.sandbox.cqrstest.abcomponent.implementation.command.EmptyNameException;
-import net.avacati.sandbox.cqrstest.abcomponent.implementation.command.NoPrimeNumbersException;
-import net.avacati.sandbox.cqrstest.abcomponent.implementation.query.ABResult;
 import net.avacati.sandbox.cqrstest.abcomponent.implementation.query.QueryService;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class ABComponentTest {
     @Test
-    public void SingleCaseHappyPath() throws NoPrimeNumbersException, EmptyNameException {
+    public void SingleCaseHappyPath() throws NoPrimeNumbersException, EmptyNameException, ProhibitedNumberException {
         // Arrange
-        EventBus bus = new EventBus();
-        CommandService commandService = new CommandService(bus);
-        QueryService queryService = new QueryService(bus);
+        IABFacade sut = getFacade();
 
         // Act
-        commandService.AddA("foo");
-        commandService.AddB("foo", "bar", 4);
+        sut.addA("foo");
+        sut.addB("foo", "bar", 4);
 
         // Assert
-        ABResult result = queryService.Query().stream().findFirst().get();
+        ABResult result = sut.query().stream().findFirst().get();
         Assert.assertEquals("foo", result.a);
         Assert.assertEquals("bar", result.b);
         Assert.assertEquals(4, result.i);
     }
 
-    @Test
-    public void MultiCaseHappyPath() throws NoPrimeNumbersException, EmptyNameException {
-        // Arrange
+    public static IABFacade getFacade() {
         EventBus bus = new EventBus();
-        CommandService commandService = new CommandService(bus);
-        QueryService queryService = new QueryService(bus);
+        return new ABFacadeImpl(new CommandService(bus, bus), new QueryService(bus));
+    }
+
+    @Test
+    public void MultiCaseHappyPath() throws NoPrimeNumbersException, EmptyNameException, ProhibitedNumberException {
+        // Arrange
+        IABFacade sut = getFacade();
 
         // Act
-        commandService.AddA("foo");
-        commandService.AddB("foo", "bar", 4);
-        commandService.AddB("foo", "baz", 6);
+        sut.addA("foo");
+        sut.addB("foo", "bar", 4);
+        sut.addB("foo", "baz", 6);
 
-        commandService.AddA("foo2");
-        commandService.AddB("foo2", "bar2", 8);
-        commandService.AddB("foo2", "baz2", 9);
+        sut.addA("foo2");
+        sut.addB("foo2", "bar2", 8);
+        sut.addB("foo2", "baz2", 9);
 
         // Assert
-        ABResult result = queryService.Query().get(0);
+        ABResult result = sut.query().get(0);
         Assert.assertEquals("foo", result.a);
         Assert.assertEquals("bar", result.b);
         Assert.assertEquals(4, result.i);
 
-        result = queryService.Query().get(1);
+        result = sut.query().get(1);
         Assert.assertEquals("foo", result.a);
         Assert.assertEquals("baz", result.b);
         Assert.assertEquals(6, result.i);
 
-        result = queryService.Query().get(2);
+        result = sut.query().get(2);
         Assert.assertEquals("foo2", result.a);
         Assert.assertEquals("bar2", result.b);
         Assert.assertEquals(8, result.i);
 
-        result = queryService.Query().get(3);
+        result = sut.query().get(3);
         Assert.assertEquals("foo2", result.a);
         Assert.assertEquals("baz2", result.b);
         Assert.assertEquals(9, result.i);
     }
 
     @Test(expected=NoPrimeNumbersException.class)
-    public void NoPrimeNumbers() throws NoPrimeNumbersException, EmptyNameException {
-        CommandService commandService = new CommandService(new EventBus());
-        commandService.AddA("foo");
-        commandService.AddB("foo", "bar", 3);
+    public void NoPrimeNumbers() throws NoPrimeNumbersException, EmptyNameException, ProhibitedNumberException {
+        IABFacade sut = getFacade();
+        sut.addA("foo");
+        sut.addB("foo", "bar", 3);
     }
 
     @Test(expected=EmptyNameException.class)
     public void NoEmptyANames() throws EmptyNameException {
-        CommandService commandService = new CommandService(new EventBus());
-        commandService.AddA("");
+        IABFacade sut = getFacade();
+        sut.addA("");
     }
 }

@@ -1,4 +1,4 @@
-package net.avacati.sandbox.cqrstest;
+package net.avacati.sandbox.cqrstest.crudcomponent;
 
 public interface ProhibitedNumberListener {
     void handle(ProhibitNumberEvent event);

@@ -1,4 +1,4 @@
-package net.avacati.sandbox.cqrstest.abcomponent.implementation.query;
+package net.avacati.sandbox.cqrstest.abcomponent;
 
 public class ABResult {
     public String a;

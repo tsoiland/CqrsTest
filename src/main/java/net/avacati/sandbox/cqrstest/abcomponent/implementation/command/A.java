@@ -1,14 +1,17 @@
 package net.avacati.sandbox.cqrstest.abcomponent.implementation.command;
 
+import net.avacati.sandbox.cqrstest.abcomponent.EmptyNameException;
+import net.avacati.sandbox.cqrstest.abcomponent.NoPrimeNumbersException;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class A {
+class A {
     private String name;
     private List<B> bList;
     private int id;
 
-    public A(int id, String name) throws EmptyNameException {
+    A(int id, String name) throws EmptyNameException {
         if(name.length() == 0)
             throw new EmptyNameException();
         this.id = id;
@@ -16,16 +19,16 @@ public class A {
         this.bList = new ArrayList<B>();
     }
 
-    public void AddB(String bName, int i) throws NoPrimeNumbersException {
+    void AddB(String bName, int i) throws NoPrimeNumbersException {
         B b = new B(bName, i);
         this.bList.add(b);
     }
 
-    public int getId() {
+    int getId() {
         return id;
     }
 
-    public String getName() {
+    String getName() {
         return name;
     }
 }

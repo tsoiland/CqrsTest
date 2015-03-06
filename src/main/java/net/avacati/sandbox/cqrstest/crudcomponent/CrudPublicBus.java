@@ -1,12 +1,16 @@
-package net.avacati.sandbox.cqrstest;
+package net.avacati.sandbox.cqrstest.crudcomponent;
+
+import net.avacati.sandbox.cqrstest.crudcomponent.AllowNumberEvent;
+import net.avacati.sandbox.cqrstest.crudcomponent.ProhibitNumberEvent;
+import net.avacati.sandbox.cqrstest.crudcomponent.ProhibitedNumberListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SystemBus {
+public class CrudPublicBus {
     private List<ProhibitedNumberListener> prohibitedNumbersListeners;
 
-    public SystemBus() {
+    public CrudPublicBus() {
         this.prohibitedNumbersListeners = new ArrayList<>();
     }
 
