@@ -1,5 +1,6 @@
-package net.avacati.sandbox.cqrstest;
+package net.avacati.sandbox.cqrstest.cqrstest;
 
+import net.avacati.sandbox.cqrstest.IntegrationPoint;
 import net.avacati.sandbox.cqrstest.abcomponent.*;
 import net.avacati.sandbox.cqrstest.crudcomponent.CrudPublicBus;
 import net.avacati.sandbox.cqrstest.crudcomponent.CrudServiceFactory;
@@ -7,7 +8,7 @@ import net.avacati.sandbox.cqrstest.crudcomponent.IProhibitionService;
 import net.avacati.sandbox.cqrstest.crudcomponent.ProhibitedNumberDto;
 import org.junit.Test;
 
-public class CqrsTests {
+public class CqrsTest {
     @Test(expected=ProhibitedNumberException.class)
     public void a() throws NoPrimeNumbersException, EmptyNameException, ProhibitedNumberException {
         // Arrange ABComponent
@@ -17,7 +18,6 @@ public class CqrsTests {
         CrudServiceFactory factory = new CrudServiceFactory();
         IProhibitionService prohibitionService = factory.create();
         CrudPublicBus crudBus = factory.getCrudPublicBus();
-
         // Arrange integration
         new IntegrationPoint(abFacade, crudBus);
 
