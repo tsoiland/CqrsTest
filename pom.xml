@@ -18,6 +18,8 @@
         <module>components/ABComponent</module>
         <module>components/CrudComponent</module>
         <module>components/Integration</module>
+        <module>Presentation</module>
+        <module>Mvc</module>
         <module>SystemTests</module>
     </modules>
 
