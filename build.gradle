@@ -1,0 +1,23 @@
+
+apply plugin: 'docker'
+
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
+    }
+}
+
+docker {
+    useApi true
+    hostUrl 'http://192.168.1.5:4243'
+}
+
+task docker(type: Docker) {
+    dockerfile "Dockerfile"
+    applicationName = "toso"
+    addFile {
+        from "Presentation/build/libs/Presentation-latest.jar"
+        into "/abcd"
+    }
+}

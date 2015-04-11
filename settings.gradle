@@ -1,0 +1,8 @@
+rootProject.name = 'Cqrstest'
+
+include 'components/ABComponent'
+include 'components/CrudComponent'
+include 'components/Integration'
+include 'Mvc'
+include 'Presentation'
+include 'SystemTests'
