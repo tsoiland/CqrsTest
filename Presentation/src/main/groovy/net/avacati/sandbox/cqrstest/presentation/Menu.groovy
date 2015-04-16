@@ -15,9 +15,13 @@ public class Menu extends ViewResult {
 
     @Override
     public String render() {
-        return
-            "<ul>" +
-                this.menuActions.stream().map(a -> "<li><a href='" + a.url + "'>" + a.menu + "</a></li>").collect(Collectors.joining()) +
-            "</ul>";
+        return """
+            <ul>
+                ${this.menuActions
+                    .stream()
+                    .map({a ->
+                        """<li><a href="$a.url">$a.menu</a></li>"""})
+                    .collect(Collectors.joining())}
+            </ul>""";
     }
 }
