@@ -5,7 +5,7 @@ import net.avacati.lib.mvc.Route;
 
 public abstract class ViewResult implements ActionResult {
     @Override
-    public OkResponse perform(Route route) {
+    public OkResponse createResult(Route route) {
         OkResponse response = new OkResponse();
         response.data = this.render();
         response.status = 200;

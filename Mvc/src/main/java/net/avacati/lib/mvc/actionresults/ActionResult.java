@@ -7,5 +7,5 @@ import net.avacati.lib.mvc.Route;
 import java.util.function.Consumer;
 
 public interface ActionResult {
-    MyResponse perform(Route route);
+    MyResponse createResult(Route route);
 }

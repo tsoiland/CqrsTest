@@ -6,8 +6,8 @@ import net.avacati.lib.mvc.actionresults.ViewResult;
 
 public abstract class View extends ViewResult {
     @Override
-    public OkResponse perform(Route route) {
-        OkResponse response = super.perform(route);
+    public OkResponse createResult(Route route) {
+        OkResponse response = super.createResult(route);
         response.data = new Layout(this, new Menu(route.getMenuActions())).render();
         return response;
     }

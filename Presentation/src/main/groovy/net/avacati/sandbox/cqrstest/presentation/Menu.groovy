@@ -1,15 +1,14 @@
-package net.avacati.sandbox.cqrstest.presentation;
+package net.avacati.sandbox.cqrstest.presentation
 
-import net.avacati.lib.mvc.Action;
-import net.avacati.lib.mvc.actionresults.ViewResult;
+import net.avacati.lib.mvc.AbstractAction
+import net.avacati.lib.mvc.actionresults.ViewResult
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class Menu extends ViewResult {
-    private List<Action> menuActions;
+    private List<AbstractAction> menuActions;
 
-    public Menu(List<Action> menuActions) {
+    public Menu(List<AbstractAction> menuActions) {
         this.menuActions = menuActions;
     }
 
