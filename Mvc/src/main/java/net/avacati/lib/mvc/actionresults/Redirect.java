@@ -2,6 +2,9 @@ package net.avacati.lib.mvc.actionresults;
 
 import net.avacati.lib.mvc.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 public class Redirect implements ActionResult {
     private AbstractAction action;
 
@@ -10,10 +13,7 @@ public class Redirect implements ActionResult {
     }
 
     @Override
-    public MyResponse createResult(Route route) {
-        RedirectResponse response = new RedirectResponse();
-        response.status = 301;
-        response.url = this.action.url;
-        return response;
+    public void createResult(Route route, HttpServletResponse response) throws IOException {
+        response.sendRedirect(this.action.url);
     }
 }

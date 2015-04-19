@@ -2,13 +2,12 @@ package net.avacati.sandbox.cqrstest.presentation;
 
 import net.avacati.lib.mvc.AbstractAction;
 import net.avacati.lib.mvc.Action;
-import net.avacati.lib.mvc.PostAction;
+import net.avacati.lib.mvc.ParameterAction;
 import net.avacati.lib.mvc.actionresults.ActionResult;
 import net.avacati.lib.mvc.actionresults.Redirect;
 import net.avacati.lib.mvc.actionresults.ViewResult;
 import net.avacati.sandbox.cqrstest.abcomponent.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -37,9 +36,9 @@ public class ABController {
         return new AddAView(addapost);
     }
 
-    public static AbstractAction addapost = new PostAction<ABController>("/abcontroller/addapost", ABController::addAPost, ABController.class);
-    public ActionResult addAPost(Map<String,String> postData) throws EmptyNameException {
-        this.abFacade.addA(postData.get("aname"));
+    public static AbstractAction addapost = new ParameterAction<ABController>("/abcontroller/addapost", ABController::addAPost, ABController.class);
+    public ActionResult addAPost(Map<String,String> params) throws EmptyNameException {
+        this.abFacade.addA(params.get("aname"));
         return new Redirect(addb);
     }
 
@@ -52,11 +51,11 @@ public class ABController {
         return new AddBView(addbpost, aNames);
     }
 
-    public static AbstractAction addbpost = new PostAction<ABController>("/abcontroller/addbpost", ABController::addBPost, ABController.class);
-    public ActionResult addBPost(Map<String,String> postData) throws EmptyNameException, NoPrimeNumbersException, ProhibitedNumberException {
-        String aName = postData.get("aname");
-        String bName = postData.get("bname");
-        int i = Integer.parseInt(postData.get("i"));
+    public static AbstractAction addbpost = new ParameterAction<ABController>("/abcontroller/addbpost", ABController::addBPost, ABController.class);
+    public ActionResult addBPost(Map<String,String> params) throws EmptyNameException, NoPrimeNumbersException, ProhibitedNumberException {
+        String aName = params.get("aname");
+        String bName = params.get("bname");
+        int i = Integer.parseInt(params.get("i"));
         this.abFacade.addB(aName, bName, i);
         return new Redirect(index);
     }

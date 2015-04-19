@@ -1,5 +1,7 @@
 package net.avacati.lib.mvc;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,14 +16,19 @@ public class Route {
         this.controllerFactory = controllerFactory;
     }
 
-    public MyResponse route(String url, Map<String, String> postdata) throws Throwable {
-        return this.actions
-                    .stream()
-                    .filter(action -> action.url.equals(url))
-                    .findAny()
-                    .get()
-                    .performAction(postdata, controllerFactory)
-                    .createResult(this);
+    public void route(String url, Map<String, String> postdata, HttpServletResponse response) throws IOException {
+        try {
+            this.actions
+                .stream()
+                .filter(action -> action.url.equals(url))
+                .findAny()
+                .get()
+                .performAction(postdata, controllerFactory)
+                .createResult(this, response);
+
+        } catch (Throwable throwable) {
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, throwable.getMessage());
+        }
     }
 
     public List<AbstractAction> getMenuActions() {

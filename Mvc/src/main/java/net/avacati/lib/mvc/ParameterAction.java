@@ -4,17 +4,17 @@ import net.avacati.lib.mvc.actionresults.ActionResult;
 
 import java.util.Map;
 
-public class PostAction<C> extends AbstractAction {
+public class ParameterAction<C> extends AbstractAction {
     private PostActionReference<C> handle;
     private Class<C> controllerClass;
 
-    public PostAction(String url, PostActionReference<C> handle, Class<C> controllerClass) {
+    public ParameterAction(String url, PostActionReference<C> handle, Class<C> controllerClass) {
         super(url);
         this.handle = handle;
         this.controllerClass = controllerClass;
     }
 
-    public PostAction(String url, PostActionReference<C> handle, String menu, Class<C> controllerClass) {
+    public ParameterAction(String url, PostActionReference<C> handle, String menu, Class<C> controllerClass) {
         super(url, menu);
         this.handle = handle;
         this.controllerClass = controllerClass;

@@ -1,11 +1,10 @@
 package net.avacati.lib.mvc.actionresults;
 
-import net.avacati.lib.mvc.MyResponse;
-import net.avacati.lib.mvc.OkResponse;
 import net.avacati.lib.mvc.Route;
 
-import java.util.function.Consumer;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public interface ActionResult {
-    MyResponse createResult(Route route);
+    void createResult(Route route, HttpServletResponse response) throws IOException;
 }
