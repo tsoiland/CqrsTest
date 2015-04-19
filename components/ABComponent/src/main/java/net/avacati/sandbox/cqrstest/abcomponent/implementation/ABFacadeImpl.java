@@ -2,6 +2,7 @@ package net.avacati.sandbox.cqrstest.abcomponent.implementation;
 
 import net.avacati.sandbox.cqrstest.abcomponent.*;
 
+import java.util.Collection;
 import java.util.List;
 
 public class ABFacadeImpl implements IABFacade {
@@ -36,5 +37,10 @@ public class ABFacadeImpl implements IABFacade {
     @Override
     public void allowNumber(int number) {
         this.commandService.allowNumber(number);
+    }
+
+    @Override
+    public Collection<String> getAllA() {
+        return this.queryService.getAllA();
     }
 }

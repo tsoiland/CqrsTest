@@ -11,6 +11,7 @@ public class ABComponentTest {
 
         // Act
         sut.addA("foo");
+        Assert.assertTrue(sut.getAllA().contains("foo"));
         sut.addB("foo", "bar", 4);
 
         // Assert

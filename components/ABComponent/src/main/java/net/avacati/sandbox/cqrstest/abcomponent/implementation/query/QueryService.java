@@ -6,10 +6,7 @@ import net.avacati.sandbox.cqrstest.abcomponent.implementation.IQueryService;
 import net.avacati.sandbox.cqrstest.abcomponent.implementation.NewAEvent;
 import net.avacati.sandbox.cqrstest.abcomponent.implementation.NewBEvent;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class QueryService implements IQueryService {
@@ -29,6 +26,12 @@ public class QueryService implements IQueryService {
         return this.data
                 .stream()
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Collection<String> getAllA() {
+        return this.aNames.values();
+
     }
 
     private void handle(NewAEvent event) {

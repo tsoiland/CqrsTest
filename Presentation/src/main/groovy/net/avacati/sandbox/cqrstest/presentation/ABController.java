@@ -8,6 +8,8 @@ import net.avacati.lib.mvc.actionresults.Redirect;
 import net.avacati.lib.mvc.actionresults.ViewResult;
 import net.avacati.sandbox.cqrstest.abcomponent.*;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +48,8 @@ public class ABController {
      */
     public static AbstractAction addb = new Action<>("/abcontroller/addb", ABController::addB, "Add B", ABController.class);
     public ViewResult addB() {
-        return new AddBView(addbpost);
+        Collection<String> aNames = this.abFacade.getAllA();
+        return new AddBView(addbpost, aNames);
     }
 
     public static AbstractAction addbpost = new PostAction<ABController>("/abcontroller/addbpost", ABController::addBPost, ABController.class);
