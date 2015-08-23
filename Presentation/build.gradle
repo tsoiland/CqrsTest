@@ -5,6 +5,7 @@ version = 'latest'
 
 repositories {
     mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
