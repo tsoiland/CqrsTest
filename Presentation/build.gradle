@@ -13,8 +13,8 @@ dependencies {
     compile (project (':components/ABComponent'))
     compile (project (':components/CrudComponent'))
     compile (project (':components/Integration'))
-    compile (project (':Mvc'))
     compile 'org.codehaus.groovy:groovy-all:2.3.6'
+    compile 'net.avacati.lib:mvc:0.0.1'
 }
 
 
