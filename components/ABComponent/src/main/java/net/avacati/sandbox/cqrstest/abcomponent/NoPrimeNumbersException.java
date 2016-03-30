@@ -1,4 +1,4 @@
 package net.avacati.sandbox.cqrstest.abcomponent;
 
-public class NoPrimeNumbersException extends Exception{
+public class NoPrimeNumbersException extends RuntimeException {
 }

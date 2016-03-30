@@ -1,4 +1,4 @@
-package net.avacati.sandbox.cqrstest.presentation;
+package net.avacati.sandbox.cqrstest.presentation.web.ab;
 
 import net.avacati.lib.mvc.AbstractAction;
 import net.avacati.lib.mvc.Action;
@@ -37,7 +37,7 @@ public class ABController {
     }
 
     public static AbstractAction addapost = new ParameterAction<ABController>("/abcontroller/addapost", ABController::addAPost, ABController.class);
-    public ActionResult addAPost(Map<String,String> params) throws EmptyNameException {
+    public ActionResult addAPost(Map<String,String> params) {
         this.abFacade.addA(params.get("aname"));
         return new Redirect(addb);
     }
@@ -52,7 +52,7 @@ public class ABController {
     }
 
     public static AbstractAction addbpost = new ParameterAction<ABController>("/abcontroller/addbpost", ABController::addBPost, ABController.class);
-    public ActionResult addBPost(Map<String,String> params) throws EmptyNameException, NoPrimeNumbersException, ProhibitedNumberException {
+    public ActionResult addBPost(Map<String,String> params) {
         String aName = params.get("aname");
         String bName = params.get("bname");
         int i = Integer.parseInt(params.get("i"));

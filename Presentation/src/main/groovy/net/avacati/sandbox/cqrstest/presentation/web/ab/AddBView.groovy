@@ -1,5 +1,6 @@
-package net.avacati.sandbox.cqrstest.presentation
+package net.avacati.sandbox.cqrstest.presentation.web.ab
 import net.avacati.lib.mvc.AbstractAction
+import net.avacati.sandbox.cqrstest.presentation.web.View
 
 public class AddBView extends View {
     private AbstractAction addbpost;

@@ -1,6 +1,7 @@
-package net.avacati.sandbox.cqrstest.presentation
+package net.avacati.sandbox.cqrstest.presentation.web.ab
 
 import net.avacati.sandbox.cqrstest.abcomponent.ABResult
+import net.avacati.sandbox.cqrstest.presentation.web.View
 
 import java.util.stream.Collectors
 

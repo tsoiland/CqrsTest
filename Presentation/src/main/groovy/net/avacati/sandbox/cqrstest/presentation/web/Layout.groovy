@@ -1,4 +1,4 @@
-package net.avacati.sandbox.cqrstest.presentation;
+package net.avacati.sandbox.cqrstest.presentation.web;
 
 import net.avacati.lib.mvc.actionresults.ViewResult;
 

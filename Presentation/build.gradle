@@ -15,6 +15,7 @@ dependencies {
     compile (project (':components/Integration'))
     compile 'org.codehaus.groovy:groovy-all:2.3.6'
     compile 'net.avacati.lib:mvc:0.0.1'
+    compile 'net.avacati.lib:jetty:0.0.1'
 }
 
 
